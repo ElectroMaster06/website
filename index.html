@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ElectroMaster</title>
+  <style>
+    /* Basic reset and box-sizing */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header, footer {
+      background-color: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    nav {
+      background-color: #111;
+      padding: 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-shrink: 0;
+    }
+
+    nav a {
+      color: #00ffff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      display: inline-block;
+      padding-bottom: 4px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #ffcc00;
+      border-bottom: 2px solid #ffcc00;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    section {
+      display: none;
+      background-color: #111;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.1);
+      width: 100%;
+      max-width: 1000px;
+      padding: 60px 40px;
+      color: #00ffff;
+      position: relative;
+      box-sizing: border-box;
+      min-height: 320px;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .title-below {
+      font-size: 3.5rem;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-top: 4px solid #00ffff;
+      padding-top: 10px;
+      margin-bottom: 30px;
+      max-width: fit-content;
+    }
+
+    ul {
+      margin-left: 20px;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    .setup-images {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .setup-images img {
+      max-width: 45%;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.3);
+      cursor: zoom-in;
+      transition: transform 0.3s ease;
+    }
+
+    .setup-images img:hover {
+      transform: scale(1.05);
+    }
+
+    #lightbox-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      cursor: zoom-out;
+    }
+
+    #lightbox-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+      cursor: zoom-out;
+    }
+
+    /* Socials links style */
+    #socials a {
+      display: inline-block;
+      color: #00ffff;
+      font-weight: bold;
+      text-decoration: none;
+      margin-right: 25px;
+      font-size: 1.3rem;
+      transition: color 0.3s;
+    }
+    #socials a:hover {
+      color: #ffcc00;
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .setup-images {
+        flex-direction: column;
+      }
+      .setup-images img {
+        max-width: 100%;
+      }
+      main {
+        padding: 20px 10px;
+      }
+      section {
+        padding: 40px 20px;
+      }
+      .title-below {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1 style="color: #00ffff;">ElectroMaster</h1>
+</header>
+
+  <nav>
+    <a href="#" data-section="welcome">Welcome</a>
+    <a href="#" data-section="setup">Setup</a>
+    <a href="#" data-section="socials">Socials</a>
+    <a href="#" data-section="about">About</a>
+  </nav>
+
+  <main>
+    <section id="welcome">
+      <div class="title-below">Welcome</div>
+      <p>Ahojte, vitajte na mojej stránke! Som ElectroMaster a na tomto webe zdieľam veci, ktoré ma zaujímajú – technológie, počítače a ďalšie témy. Tu sa dozviete viac o tom, čo robím a čo ma baví, ako aj o veciach, ktoré sú momentálne mojou vášňou.</p>
+      <p><!-- Priestor na doplnenie textu --></p>
+    </section>
+
+    <section id="setup">
+  <div class="title-below">Setup</div>
+  <p>Mám našlapaný počítač, ktorý zvláda všetko od hier až po tvorbu. Tu je pár komponentov:</p>
+  <!-- PC komponenty -->
+  <ul>
+    <li>CPU: Ryzen 5 7600</li>
+    <li>GPU: XFX RX 7800 XT</li>
+    <li>MB: ASUS TUF GAMING B650-PLUS</li>
+    <li>RAM: Kingston FURY 32GB DDR5 6000MT/s</li>
+    <li>SSD: Kingston KC3000 2TB NVMe</li>
+    <li>PSU: Corsair RM650</li>
+    <li>Chladič: Endorfy Fera 5 ARGB</li>
+    <li>Case: NZXT H5 Elite Black</li>
+  </ul>
+
+  <!-- Obrázky setupu -->
+  <div class="setup-images">
+    <img src="setup-photo1.jpg" class="zoomable" onclick="openLightbox(this)" />
+    <img src="setup-photo2.jpg" class="zoomable" onclick="openLightbox(this)" />
+  </div>
+
+  <!-- Periferie oddelené samostatne -->
+  <div class="title-below">Periferie</div>
+  <ul>
+    <li>Mouse: Logitech GPX2</li>
+    <li>Klávesnica: HyperX Alloy Origins (full size)</li>
+    <li>Headset: Logitech G Pro X</li>
+    <li>Mikrofón: FIFINE AM8 + rameno BM88</li>
+    <li>Monitory: MSI G27CQ4 E2 a 24B2W1G5</li>
+    <li>Laptop: ASUS TUF Gaming A15 FA507NV</li>
+  </ul>
+</section>
+
+    <section id="socials">
+      <div class="title-below">Socials</div>
+      <p>Čau! Vítam ťa na mojich sociálnych sieťach. Najčastejšie ma nájdeš na Discorďe.</p>
+	    <a href="https://www.youtube.com/@ElectroMaster1" target="_blank" rel="noopener noreferrer">Youtube</a>
+        <a href="https://www.twitch.tv/electromaster11" target="_blank" rel="noopener noreferrer">Twitch</a>
+        <a href="https://discord.com/invite/draFtScz44" target="_blank" rel="noopener noreferrer">Discord</a></p>
+    </section>
+
+<section id="about">
+  <div class="title-below">About</div>
+  <p>Ahoj! 👋
+Volám sa Mirko a som mladý geek. Milujem všetko okolo počítačov – od skladania zostáv, cez hranie, až po špekulovanie, čo všetko by sa dalo ešte vylepšiť.
+
+Anime je moja srdcovka, hlavne Sword Art Online (SAO) – čistá 10/10, a nehanbím sa to povedať hocikde a hocikomu.
+
+Táto stránka je moje kreatívne ihrisko – budem sem možno pridávať ďalšie veci, experimenty alebo projekty, na ktorých robím.
+
+Ak si to sem dotiahol, tak veľká vďaka, že si tu. Každé zobrazenie a spätná väzba ma posúva ďalej. 👨‍💻🔥</p>
+  
+  <!-- Disqus Comment Section -->
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;  // Dynamicky získava URL stránky
+      this.page.identifier = 'about-section';  // Unikátny identifier pre stránku
+    };
+
+    (function() {  // Tento kód needituj
+      var d = document, s = d.createElement('script');
+      s.src = 'https://electromaster.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  
+  <!-- Disqus comment count script -->
+  <script id="dsq-count-scr" src="//electromaster.disqus.com/count.js" async></script>
+  
+  <noscript>
+    Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</section>
+
+</section>
+      <p><!-- Priestor na doplnenie textu --></p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 By ElectroMaster. Všetky práva vyhradené.
+  </footer>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox-overlay" onclick="closeLightbox()">
+    <img id="lightbox-image" src="" alt="Expanded Image" />
+  </div>
+
+  <script>
+    // Nav links and sections
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('main section');
+
+    // Show only the selected section; hide others
+    function showSection(sectionId) {
+      sections.forEach(sec => {
+        sec.classList.toggle('active', sec.id === sectionId);
+      });
+      // Highlight active nav link
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.section === sectionId);
+      });
+    }
+
+    // Click handler updates content only, no URL change
+    function onNavClick(event) {
+  event.preventDefault();
+  const sectionId = event.currentTarget.dataset.section;
+  showSection(sectionId);
+  window.scrollTo(0, 0); // Posun na vrch stránky
+}
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', onNavClick);
+    });
+
+    // Lightbox open/close functions
+    function openLightbox(img) {
+      const overlay = document.getElementById('lightbox-overlay');
+      const lightboxImg = document.getElementById('lightbox-image');
+      lightboxImg.src = img.src;
+      overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const overlay = document.getElementById('lightbox-overlay');
+      overlay.style.display = 'none';
+      document.getElementById('lightbox-image').src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.getElementById('lightbox-overlay').addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeLightbox();
+    });
+
+    // Initialize displayed section on page load to 'welcome'
+    window.addEventListener('DOMContentLoaded', () => {
+      showSection('welcome');
+    });
+  </script>
+</body>
+</html>

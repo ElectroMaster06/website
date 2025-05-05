@@ -23,14 +23,6 @@ body {
   flex-direction: column;
 }
 
-/* Úprava pre mobilné zariadenia */
-@media (max-width: 700px) {
-  body {
-    background-size: contain; /* Obrázok sa prispôsobí šírke obrazovky */
-    background-position: top; /* Zarovná obrázok na vrch */
-  }
-}
-
     header, footer {
       background-color: #1a1a1a;
       padding: 20px;
@@ -174,21 +166,38 @@ body {
 
     /* Responsive */
     @media (max-width: 700px) {
-      .setup-images {
-        flex-direction: column;
+      body {
+        background: url('background.jpg') no-repeat center center; /* Obrázok na pozadí */
+        background-size: contain; /* Obrázok sa prispôsobí šírke obrazovky */
+        background-attachment: scroll; /* Fixné pozadie vypnuté pre mobily */
       }
-      .setup-images img {
-        max-width: 100%;
-      }
+
       main {
-        padding: 20px 10px;
+        padding: 20px 10px; /* Zmenšenie paddingu */
       }
+
       section {
-        padding: 40px 20px;
+        padding: 20px 15px; /* Zmenšenie paddingu sekcií */
       }
+
       .title-below {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
+        font-size: 2rem; /* Zmenšenie veľkosti nadpisov */
+        margin-bottom: 15px;
+      }
+
+      nav a {
+        font-size: 1rem; /* Zmenšenie veľkosti textu v navigácii */
+        margin: 0 10px;
+      }
+
+      .setup-images {
+        flex-direction: column; /* Obrázky v stĺpci */
+        gap: 10px;
+      }
+
+      .setup-images img {
+        max-width: 100%; /* Obrázky sa prispôsobia šírke */
+        height: auto;
       }
     }
   </style>
@@ -358,3 +367,4 @@ Ak si to sem dotiahol, tak veľká vďaka, že si tu. Každé zobrazenie a spät
   </script>
 </body>
 </html>
+``` 

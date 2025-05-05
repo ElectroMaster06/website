@@ -23,6 +23,14 @@ body {
   flex-direction: column;
 }
 
+/* Úprava pre mobilné zariadenia */
+@media (max-width: 700px) {
+  body {
+    background-size: contain; /* Obrázok sa prispôsobí šírke obrazovky */
+    background-position: top; /* Zarovná obrázok na vrch */
+  }
+}
+
     header, footer {
       background-color: #1a1a1a;
       padding: 20px;

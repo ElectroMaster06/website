@@ -327,6 +327,8 @@ Ak si to sem dotiahol, tak veľká vďaka, že si tu. Každé zobrazenie a spät
       const overlay = document.getElementById('lightbox-overlay');
       const lightboxImg = document.getElementById('lightbox-image');
       lightboxImg.src = img.src;
+      lightboxImg.style.transform = 'scale(1)'; // Reset zoom
+      lightboxImg.style.transformOrigin = 'center'; // Reset transform origin
       overlay.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
@@ -337,6 +339,33 @@ Ak si to sem dotiahol, tak veľká vďaka, že si tu. Každé zobrazenie a spät
       document.getElementById('lightbox-image').src = '';
       document.body.style.overflow = 'auto';
     }
+
+    // Zoom in/out with mouse wheel at cursor position
+    const lightboxImg = document.getElementById('lightbox-image');
+    let scale = 1; // Initial zoom level
+
+    lightboxImg.addEventListener('wheel', event => {
+      event.preventDefault();
+      const zoomStep = 0.1; // How much to zoom in/out per scroll
+      const rect = lightboxImg.getBoundingClientRect(); // Get image position and size
+
+      // Calculate cursor position relative to the image
+      const offsetX = (event.clientX - rect.left) / rect.width;
+      const offsetY = (event.clientY - rect.top) / rect.height;
+
+      // Adjust zoom level
+      if (event.deltaY < 0) {
+        // Scroll up (zoom in)
+        scale = Math.min(scale + zoomStep, 3); // Max zoom level: 3x
+      } else {
+        // Scroll down (zoom out)
+        scale = Math.max(scale - zoomStep, 1); // Min zoom level: 1x (original size)
+      }
+
+      // Set transform origin to cursor position
+      lightboxImg.style.transformOrigin = `${offsetX * 100}% ${offsetY * 100}%`;
+      lightboxImg.style.transform = `scale(${scale})`;
+    });
 
     document.getElementById('lightbox-overlay').addEventListener('click', closeLightbox);
     document.addEventListener('keydown', event => {

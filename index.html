@@ -228,13 +228,13 @@ body {
   </style>
 </head>
 <body>
-<div id="music-controls" style="position:fixed;top:22px;right:32px;z-index:2000;display:flex;align-items:center;gap:10px;background:#111;padding:8px 12px;border-radius:8px;box-shadow:0 0 10px rgba(0,255,255,0.2);touch-action:none;">
-  <div id="music-dragger" style="width:18px;height:40px;cursor:grab;background:linear-gradient(180deg,#00ffff 60%,#111 100%);border-radius:6px;margin-right:12px;display:flex;align-items:center;justify-content:center;">
-    <span style="width:6px;height:24px;display:block;background:rgba(0,0,0,0.18);border-radius:3px;"></span>
+<div id="music-controls" style="position:fixed;top:22px;right:32px;z-index:2000;display:flex;align-items:center;gap:6px;background:#111;padding:4px 8px;border-radius:8px;box-shadow:0 0 10px rgba(0,255,255,0.2);touch-action:none;min-height:36px;">
+  <div id="music-dragger" style="width:14px;height:32px;cursor:grab;background:linear-gradient(180deg,#00ffff 60%,#111 100%);border-radius:5px;margin-right:8px;display:flex;align-items:center;justify-content:center;">
+    <span style="width:4px;height:18px;display:block;background:rgba(0,0,0,0.18);border-radius:2px;"></span>
   </div>
-  <button id="music-toggle" style="background:#111;color:#00ffff;border:none;padding:12px 22px;border-radius:8px;font-size:1.1rem;cursor:pointer;">🎵 Vypnúť hudbu</button>
-  <input id="vol-slider" type="range" min="0" max="100" value="50" style="accent-color:#00ffff;">
-  <span id="vol-value" style="color:#00ffff;font-weight:bold;width:32px;display:inline-block;text-align:right;">50</span>
+  <button id="music-toggle" style="background:#111;color:#00ffff;border:none;padding:6px 12px;border-radius:6px;font-size:0.95rem;cursor:pointer;min-width:90px;">🎵 Hudba</button>
+  <input id="vol-slider" type="range" min="0" max="100" value="50" style="accent-color:#00ffff;width:70px;height:18px;">
+  <span id="vol-value" style="color:#00ffff;font-weight:bold;width:24px;display:inline-block;text-align:right;font-size:0.95rem;">50</span>
 </div>
 <audio id="bg-music" src="music.mp3" autoplay muted loop></audio>
 <header>

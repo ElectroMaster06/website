@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- saved from url=(0020)https://electromaster06.github.io/website// -->
 <html lang="sk">
 <head>
   <meta charset="UTF-8" />
@@ -352,6 +353,12 @@ Ak si to sem dotiahol, tak veľká vďaka, že si tu. Každé zobrazenie a spät
     <img id="lightbox-image" src="" alt="Expanded Image" />
   </div>
 
+  <!-- Pridaj pred </body> -->
+<div id="mini-video" style="display:none;position:fixed;bottom:24px;right:24px;z-index:3000;background:#111;border-radius:12px;box-shadow:0 0 16px #00ffff88;padding:8px;">
+  <iframe id="mini-iframe" width="280" height="158" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border-radius:8px;"></iframe>
+  <button onclick="closeMiniVideo()" style="display:block;margin:6px auto 0 auto;background:#222;color:#00ffff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">Zavrieť</button>
+</div>
+
   <script>
     // Nav links and sections
     const navLinks = document.querySelectorAll('nav a');
@@ -525,6 +532,45 @@ document.addEventListener('touchmove', function(e) {
 document.addEventListener('touchend', function() {
   isDragging = false;
 });
+
+let videoStarted = false;
+
+document.querySelector('#socials .socials-video iframe').addEventListener('play', () => {
+  videoStarted = true;
+});
+
+// Pri prepnutí sekcie
+function showSection(sectionId) {
+  sections.forEach(sec => {
+    sec.classList.toggle('active', sec.id === sectionId);
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.dataset.section === sectionId);
+  });
+
+  // Ak video bolo spustené a sekcia nie je "socials", zobraz mini okno
+  if (videoStarted && sectionId !== 'socials') {
+    showMiniVideo();
+  } else {
+    closeMiniVideo();
+  }
+}
+
+function showMiniVideo() {
+  const mini = document.getElementById('mini-video');
+  const miniIframe = document.getElementById('mini-iframe');
+  miniIframe.src = "https://www.youtube.com/embed/G5Ddy0Mrs3w?autoplay=1";
+  mini.style.display = "block";
+}
+
+function closeMiniVideo() {
+  const mini = document.getElementById('mini-video');
+  const miniIframe = document.getElementById('mini-iframe');
+  miniIframe.src = "";
+  mini.style.display = "none";
+}
+
+document.querySelector('https://youtu.be/G5Ddy0Mrs3w').requestPictureInPicture();
   </script>
 </body>
 </html>

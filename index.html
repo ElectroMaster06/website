@@ -195,9 +195,45 @@ body {
         margin-bottom: 20px;
       }
     }
+
+    #socials .socials-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+}
+#socials .socials-video {
+  min-width: 320px;
+  max-width: 320px;
+  margin-right: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#socials .socials-content {
+  flex: 1;
+}
+@media (max-width: 900px) {
+  #socials .socials-flex {
+    flex-direction: column;
+    gap: 0;
+  }
+  #socials .socials-video {
+    margin: 0 0 18px 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 0;
+  }
+}
   </style>
 </head>
 <body>
+<button id="music-toggle" style="position:fixed;top:22px;right:32px;z-index:2000;background:#111;color:#00ffff;border:none;padding:12px 22px;border-radius:8px;font-size:1.1rem;cursor:pointer;box-shadow:0 0 10px rgba(0,255,255,0.2);transition:background 0.3s;">🎵 Vypnúť hudbu</button>
+<div style="position:fixed;top:62px;right:32px;z-index:2000;display:flex;align-items:center;gap:10px;background:#111;padding:8px 12px;border-radius:8px;">
+  <input id="vol-slider" type="range" min="0" max="100" value="50" style="accent-color:#00ffff;">
+  <span id="vol-value" style="color:#00ffff;font-weight:bold;width:32px;display:inline-block;text-align:right;">50</span>
+</div>
+<audio id="bg-music" src="music.mp3" autoplay muted loop></audio>
 <header>
   <h1 style="color: #00ffff;">ElectroMaster</h1>
 </header>
@@ -250,11 +286,18 @@ body {
 </section>
 
     <section id="socials">
-      <div class="title-below">Socials</div>
-      <p>Čau! Vítam ťa na mojich sociálnych sieťach. Najčastejšie ma nájdeš na Discorďe.</p>
-	    <a href="https://www.youtube.com/@ElectroMaster1" target="_blank" rel="noopener noreferrer">Youtube</a>
+      <div class="socials-flex">
+      <div class="socials-video">
+        <iframe width="320" height="180" src="https://www.youtube.com/watch?v=G5Ddy0Mrs3w" title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border-radius:10px; max-width:100%;"></iframe>
+      </div>
+      <div class="socials-content">
+        <div class="title-below">Socials</div>
+        <p>Čau! Vítam ťa na mojich sociálnych sieťach. Najčastejšie ma nájdeš na Discorďe.</p>
+        <a href="https://www.youtube.com/@ElectroMaster1" target="_blank" rel="noopener noreferrer">Youtube</a>
         <a href="https://www.twitch.tv/electromaster11" target="_blank" rel="noopener noreferrer">Twitch</a>
-        <a href="https://discord.com/invite/draFtScz44" target="_blank" rel="noopener noreferrer">Discord</a></p>
+        <a href="https://discord.com/invite/draFtScz44" target="_blank" rel="noopener noreferrer">Discord</a>
+      </div>
+    </div>
     </section>
 
 <section id="about">
@@ -388,6 +431,48 @@ Ak si to sem dotiahol, tak veľká vďaka, že si tu. Každé zobrazenie a spät
     window.addEventListener('DOMContentLoaded', () => {
       showSection('welcome');
     });
+
+    // Music toggle button
+const musicBtn = document.getElementById('music-toggle');
+const music = document.getElementById('bg-music');
+const volSlider = document.getElementById('vol-slider');
+const volValue = document.getElementById('vol-value');
+let musicPlaying = true;
+
+// Po načítaní stránky odmutuj a spusti hudbu po prvom kliknutí kdekoľvek
+window.addEventListener('DOMContentLoaded', () => {
+  music.volume = 0.5;
+  volSlider.value = 50;
+  volValue.textContent = 50;
+  // Pokus o autoplay s odmutovaním po prvej interakcii
+  const enableAudio = () => {
+    music.muted = false;
+    music.play();
+    document.removeEventListener('click', enableAudio);
+  };
+  document.addEventListener('click', enableAudio);
+  musicBtn.textContent = '⏸️ Vypnúť hudbu';
+});
+
+// Posuvník hlasitosti
+volSlider.addEventListener('input', () => {
+  const vol = volSlider.value;
+  music.volume = vol / 100;
+  volValue.textContent = vol;
+});
+
+musicBtn.addEventListener('click', () => {
+  if (!musicPlaying) {
+    music.muted = false;
+    music.play();
+    musicBtn.textContent = '⏸️ Vypnúť hudbu';
+    musicPlaying = true;
+  } else {
+    music.pause();
+    musicBtn.textContent = '🎵 Zapnúť hudbu';
+    musicPlaying = false;
+  }
+});
   </script>
 </body>
 </html>

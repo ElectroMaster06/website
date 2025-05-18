@@ -226,13 +226,6 @@ body {
     padding: 10px 0;
   }
 }
-
-/* Skryje time-display na mobilných zariadeniach (šírka obrazovky do 768px) */
-@media (max-width: 768px) {
-  #time-display {
-    display: none;
-  }
-}
   </style>
 </head>
 <body>
@@ -610,6 +603,17 @@ function closeMiniVideo() {
 }
 
 document.querySelector('https://youtu.be/G5Ddy0Mrs3w').requestPictureInPicture();
+  </script>
+  <script>
+    function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (isMobileDevice()) {
+    document.getElementById('time-display').style.display = 'none';
+  }
+});
   </script>
 </body>
 </html>

@@ -229,6 +229,12 @@ body {
   </style>
 </head>
 <body>
+  <div id="time-display" style="position:fixed;top:22px;left:32px;z-index:2000;display:flex;align-items:center;gap:8px;background:#111;padding:4px 8px;border-radius:8px;box-shadow:0 0 10px rgba(0,255,255,0.2);">
+    <span id="current-time" style="color:#00ffff;font-weight:bold;font-size:0.95rem;">00:00:00</span>
+    <span style="color:#00ffff;opacity:0.5;">|</span>
+    <span id="current-date" style="color:#00ffff;font-size:0.95rem;">1.1.2024</span>
+  </div>
+
 <div id="music-controls" style="position:fixed;top:22px;right:32px;z-index:2000;display:flex;align-items:center;gap:6px;background:#111;padding:4px 8px;border-radius:8px;box-shadow:0 0 10px rgba(0,255,255,0.2);touch-action:none;min-height:36px;">
   <div id="music-dragger" style="width:14px;height:32px;cursor:grab;background:linear-gradient(180deg,#00ffff 60%,#111 100%);border-radius:5px;margin-right:8px;display:flex;align-items:center;justify-content:center;">
     <span style="width:4px;height:18px;display:block;background:rgba(0,0,0,0.18);border-radius:2px;"></span>
@@ -360,6 +366,32 @@ Ak si to sem dotiahol, tak veľká vďaka, že si tu. Každé zobrazenie a spät
 </div>
 
   <script>
+    function updateDateTime() {
+      const now = new Date();
+
+      // Formátovanie času (HH:MM:SS)
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const time = `${hours}:${minutes}:${seconds}`;
+
+      // Formátovanie dátumu (D.M.YYYY)
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+      const date = `${day}.${month}.${year}`;
+
+      document.getElementById('current-time').textContent = time;
+      document.getElementById('current-date').textContent = date;
+    }
+
+    // Aktualizuj čas každú sekundu
+    setInterval(updateDateTime, 1000);
+
+    // Spusti prvú aktualizáciu ihneď
+    updateDateTime();
+  </script>
+  <script>
     // Nav links and sections
     const navLinks = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('main section');
@@ -449,12 +481,19 @@ const volSlider = document.getElementById('vol-slider');
 const volValue = document.getElementById('vol-value');
 let musicPlaying = true;
 
-// Po načítaní stránky odmutuj a spusti hudbu po prvom kliknutí kdekoľvek
+// Jednoduchší handler pre volume
+volSlider.addEventListener('input', () => {
+  const vol = volSlider.value / 100;  // Konverzia na hodnotu 0-1
+  music.volume = vol;
+  volValue.textContent = volSlider.value;
+});
+
+// Počiatočné nastavenie
 window.addEventListener('DOMContentLoaded', () => {
-  music.volume = 0.5;
+  music.volume = 0.5;  // 50%
   volSlider.value = 50;
   volValue.textContent = 50;
-  // Pokus o autoplay s odmutovaním po prvej interakcii
+  
   const enableAudio = () => {
     music.muted = false;
     music.play();
@@ -462,13 +501,6 @@ window.addEventListener('DOMContentLoaded', () => {
   };
   document.addEventListener('click', enableAudio);
   musicBtn.textContent = '⏸️ Vypnúť hudbu';
-});
-
-// Posuvník hlasitosti
-volSlider.addEventListener('input', () => {
-  const vol = volSlider.value;
-  music.volume = vol / 100;
-  volValue.textContent = vol;
 });
 
 musicBtn.addEventListener('click', () => {

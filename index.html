@@ -149,10 +149,11 @@
   <button id="toggle-music-controls">
     <span style="display:block;width:18px;height:18px;border-radius:50%;background:#111;"></span>
   </button>
+  <!-- DRAGGER MUSÍ BYŤ TU -->
+  <div id="music-dragger" style="width:14px;height:32px;cursor:grab;background:linear-gradient(180deg,#00ffff 60%,#111 100%);border-radius:5px;margin-right:8px;display:flex;align-items:center;justify-content:center;">
+    <span style="width:4px;height:18px;display:block;background:rgba(0,0,0,0.18);border-radius:2px;"></span>
+  </div>
   <div id="music-controls-hideable">
-    <div id="music-dragger" style="width:14px;height:32px;cursor:grab;background:linear-gradient(180deg,#00ffff 60%,#111 100%);border-radius:5px;margin-right:8px;display:flex;align-items:center;justify-content:center;">
-      <span style="width:4px;height:18px;display:block;background:rgba(0,0,0,0.18);border-radius:2px;"></span>
-    </div>
     <div id="music-controls-inner" style="display:flex;align-items:center;gap:6px;">
       <button id="music-toggle" style="background:#111;color:#00ffff;border:none;padding:6px 12px;border-radius:6px;font-size:0.95rem;cursor:pointer;min-width:90px;">🎵 Hudba</button>
       <input id="vol-slider" type="range" min="0" max="100" value="50" style="accent-color:#00ffff;width:70px;height:18px;">

@@ -38,8 +38,8 @@ nav a {
   margin: 0 15px;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s,
-  display inline-block;
+  transition: color 0.3s, border-bottom 0.3s;
+  display: inline-block;
   padding-bottom: 4px;
   font-size: 1.2rem;
   cursor: pointer;
@@ -188,6 +188,52 @@ section a:hover {
   flex: 1;
 }
 
+/* Music controls style */
+#music-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #111;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
+  padding: 4px 8px;
+  gap: 6px;
+  position: fixed;
+  top: 22px;
+  right: 32px;
+  z-index: 2000;
+  min-height: 36px;
+  touch-action: none;
+}
+
+#toggle-music-controls {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #00ffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-right: 8px;
+  transition: background-color 0.3s;
+}
+#toggle-music-controls:hover {
+  background-color: #ffcc00;
+}
+
+#music-controls-hideable {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+.music-controls-hidden #music-controls-hideable {
+  display: none !important;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   #socials .socials-flex {
@@ -220,3 +266,4 @@ section a:hover {
     margin-bottom: 20px;
   }
 }
+

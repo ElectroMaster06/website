@@ -19,20 +19,16 @@
   <div id="time-display" style="position:fixed;top:22px;left:32px;z-index:2000;display:flex;align-items:center;gap:8px;background:#111;padding:4px 8px;border-radius:8px;box-shadow:0 0 10px rgba(0,255,255,0.2);">
     <span id="current-time" style="color:#00ffff;font-weight:bold;font-size:0.95rem;">00:00:00</span>
     <span style="color:#00ffff;opacity:0.5;">|</span>
-    <span id="current-date" style="color:#00ffff;font-size:0.95rem;">19.5.2025</span>
+    <span id="current-date" style="color:#00ffff;font-size:0.95rem;">00.0.0000</span>
   </div>
 
-  <div id="music-controls" style="position:fixed;top:22px;right:32px;z-index:2000;display:flex;align-items:center;gap:6px;background:#111;padding:4px 8px;border-radius:8px;box-shadow:0 0 10px rgba(0,255,255,0.2);touch-action:none;min-height:36px;">
-    <div id="music-dragger" style="width:14px;height:32px;cursor:grab;background:linear-gradient(180deg,#00ffff 60%,#111 100%);border-radius:5px;margin-right:8px;display:flex;align-items:center;justify-content:center;">
-      <span style="width:4px;height:18px;display:block;background:rgba(0,0,0,0.18);border-radius:2px;"></span>
+
     </div>
-    <button id="music-toggle" style="background:#111;color:#00ffff;border:none;padding:6px 12px;border-radius:6px;font-size:0.95rem;cursor:pointer;min-width:90px;">🎵 Hudba</button>
-    <input id="vol-slider" type="range" min="0" max="100" value="50" style="accent-color:#00ffff;width:70px;height:18px;">
-    <span id="vol-value" style="color:#00ffff;font-weight:bold;width:24px;display:inline-block;text-align:right;font-size:0.95rem;">50</span>
   </div>
   <audio id="bg-music" src="music.mp3" autoplay muted loop></audio>
   <header>
     <h1 style="color: #00ffff;">ElectroMaster</h1>
+  
   </header>
 
   <nav>
@@ -147,6 +143,23 @@
     <iframe id="mini-iframe" width="280" height="158" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border-radius:8px;"></iframe>
     <button onclick="closeMiniVideo()" style="display:block;margin:6px auto 0 auto;background:#222;color:#00ffff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">Zavrieť</button>
   </div>
+
+  <!-- Music Controls Panel -->
+<div id="music-controls">
+  <button id="toggle-music-controls">
+    <span style="display:block;width:18px;height:18px;border-radius:50%;background:#111;"></span>
+  </button>
+  <div id="music-controls-hideable">
+    <div id="music-dragger" style="width:14px;height:32px;cursor:grab;background:linear-gradient(180deg,#00ffff 60%,#111 100%);border-radius:5px;margin-right:8px;display:flex;align-items:center;justify-content:center;">
+      <span style="width:4px;height:18px;display:block;background:rgba(0,0,0,0.18);border-radius:2px;"></span>
+    </div>
+    <div id="music-controls-inner" style="display:flex;align-items:center;gap:6px;">
+      <button id="music-toggle" style="background:#111;color:#00ffff;border:none;padding:6px 12px;border-radius:6px;font-size:0.95rem;cursor:pointer;min-width:90px;">🎵 Hudba</button>
+      <input id="vol-slider" type="range" min="0" max="100" value="50" style="accent-color:#00ffff;width:70px;height:18px;">
+      <span id="vol-value" style="color:#00ffff;font-weight:bold;width:24px;display:inline-block;text-align:right;font-size:0.95rem;">50</span>
+    </div>
+  </div>
+</div>
 
   <!-- Tvoj hlavný JS súbor -->
   <script src="js/main.js"></script>

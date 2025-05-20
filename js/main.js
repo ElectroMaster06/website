@@ -63,9 +63,63 @@ window.addEventListener('DOMContentLoaded', () => {
       link.classList.add('active');
     });
   });
+
+  const musicControls = document.getElementById('music-controls');
+  const toggleBtn = document.getElementById('toggle-music-controls');
+
+  if (musicControls && toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      musicControls.classList.toggle('music-controls-hidden');
+    });
+  }
+
+  const musicBtn = document.getElementById('music-toggle');
+  const music = document.getElementById('bg-music');
+  const volSlider = document.getElementById('vol-slider');
+  const volValue = document.getElementById('vol-value');
+  let musicPlaying = true;
+
+  if (music && musicBtn && volSlider && volValue) {
+    // Povoliť prehrávanie hudby až po prvom kliknutí na stránku
+    const enableAudio = () => {
+      music.muted = false;
+      music.play();
+      document.removeEventListener('click', enableAudio);
+    };
+    document.addEventListener('click', enableAudio);
+
+    // Slider na hlasitosť
+    volSlider.addEventListener('input', () => {
+      const vol = volSlider.value / 100;
+      music.volume = vol;
+      volValue.textContent = volSlider.value;
+    });
+    // Inicializuj hodnotu
+    music.volume = volSlider.value / 100;
+    volValue.textContent = volSlider.value;
+
+    // Prepínanie hudby
+    musicBtn.addEventListener('click', () => {
+      if (music.paused || music.muted) {
+        music.muted = false;
+        music.play();
+        musicBtn.textContent = '⏸️ Vypnúť hudbu';
+        musicPlaying = true;
+      } else {
+        music.pause();
+        musicBtn.textContent = '🎵 Zapnúť hudbu';
+        musicPlaying = false;
+      }
+    });
+  }
+
+  // --- Skryť čas na mobile ---
+  if (isMobileDevice()) {
+    const timeDisplay = document.getElementById('time-display');
+    if (timeDisplay) timeDisplay.style.display = 'none';
+  }
 });
 
-// Pridaj do svojho JS súboru
 document.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', function() {
     document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -88,54 +142,26 @@ if (volSlider && music && volValue) {
   });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  if (music && musicBtn && volSlider && volValue) {
-    music.volume = 0.5;
-    volSlider.value = 50;
-    volValue.textContent = 50;
-    const enableAudio = () => {
-      music.muted = false;
-      music.play();
-      document.removeEventListener('click', enableAudio);
-    };
-    document.addEventListener('click', enableAudio);
-    musicBtn.textContent = '⏸️ Vypnúť hudbu';
-    musicBtn.addEventListener('click', () => {
-      if (!musicPlaying) {
-        music.muted = false;
-        music.play();
-        musicBtn.textContent = '⏸️ Vypnúť hudbu';
-        musicPlaying = true;
-      } else {
-        music.pause();
-        musicBtn.textContent = '🎵 Zapnúť hudbu';
-        musicPlaying = false;
-      }
-    });
-  }
-});
-
 // --- Music Controls Drag ---
-const musicControls = document.getElementById('music-controls');
+const musicControlsDraggable = document.getElementById('music-controls');
 const musicDragger = document.getElementById('music-dragger');
 let isDragging = false, dragOffsetX = 0, dragOffsetY = 0;
-
-if (musicDragger && musicControls) {
+if (musicDragger && musicControlsDraggable) {
   // Mouse events
   musicDragger.addEventListener('mousedown', function(e) {
     isDragging = true;
-    dragOffsetX = e.clientX - musicControls.getBoundingClientRect().left;
-    dragOffsetY = e.clientY - musicControls.getBoundingClientRect().top;
+    dragOffsetX = e.clientX - musicControlsDraggable.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - musicControlsDraggable.getBoundingClientRect().top;
     musicDragger.style.cursor = 'grabbing';
     document.body.style.userSelect = 'none';
   });
   document.addEventListener('mousemove', function(e) {
     if (isDragging) {
-      musicControls.style.left = (e.clientX - dragOffsetX) + 'px';
-      musicControls.style.top = (e.clientY - dragOffsetY) + 'px';
-      musicControls.style.right = 'auto';
-      musicControls.style.bottom = 'auto';
-      musicControls.style.position = 'fixed';
+      musicControlsDraggable.style.left = (e.clientX - dragOffsetX) + 'px';
+      musicControlsDraggable.style.top = (e.clientY - dragOffsetY) + 'px';
+      musicControlsDraggable.style.right = 'auto';
+      musicControlsDraggable.style.bottom = 'auto';
+      musicControlsDraggable.style.position = 'fixed';
     }
   });
   document.addEventListener('mouseup', function() {
@@ -148,17 +174,17 @@ if (musicDragger && musicControls) {
   musicDragger.addEventListener('touchstart', function(e) {
     isDragging = true;
     const touch = e.touches[0];
-    dragOffsetX = touch.clientX - musicControls.getBoundingClientRect().left;
-    dragOffsetY = touch.clientY - musicControls.getBoundingClientRect().top;
+    dragOffsetX = touch.clientX - musicControlsDraggable.getBoundingClientRect().left;
+    dragOffsetY = touch.clientY - musicControlsDraggable.getBoundingClientRect().top;
   });
   document.addEventListener('touchmove', function(e) {
     if (isDragging) {
       const touch = e.touches[0];
-      musicControls.style.left = (touch.clientX - dragOffsetX) + 'px';
-      musicControls.style.top = (touch.clientY - dragOffsetY) + 'px';
-      musicControls.style.right = 'auto';
-      musicControls.style.bottom = 'auto';
-      musicControls.style.position = 'fixed';
+      musicControlsDraggable.style.left = (touch.clientX - dragOffsetX) + 'px';
+      musicControlsDraggable.style.top = (touch.clientY - dragOffsetY) + 'px';
+      musicControlsDraggable.style.right = 'auto';
+      musicControlsDraggable.style.bottom = 'auto';
+      musicControlsDraggable.style.position = 'fixed';
     }
   }, {passive: false});
   document.addEventListener('touchend', function() {
@@ -212,9 +238,11 @@ updateDateTime();
 function isMobileDevice() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
-window.addEventListener('DOMContentLoaded', () => {
-  if (isMobileDevice()) {
-    const timeDisplay = document.getElementById('time-display');
-    if (timeDisplay) timeDisplay.style.display = 'none';
-  }
-});
+
+// --- Skryť čas na mobile ---
+if (isMobileDevice()) {
+  const timeDisplay = document.getElementById('time-display');
+  if (timeDisplay) timeDisplay.style.display = 'none';
+}
+
+// --- Koniec ---

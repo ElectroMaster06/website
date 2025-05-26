@@ -80,14 +80,6 @@ window.addEventListener('DOMContentLoaded', () => {
   let musicPlaying = true;
 
   if (music && musicBtn && volSlider && volValue) {
-    // Povoliť prehrávanie hudby až po prvom kliknutí na stránku
-    const enableAudio = () => {
-      music.muted = false;
-      music.play();
-      document.removeEventListener('click', enableAudio);
-    };
-    document.addEventListener('click', enableAudio);
-
     // Slider na hlasitosť
     volSlider.addEventListener('input', () => {
       const vol = volSlider.value / 100;
